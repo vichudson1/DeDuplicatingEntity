@@ -11,7 +11,7 @@ There is only one method you need to add to your model type.
 `func moveRelationships(to destination: MyNSManagedObjectSubclass)`
 
 Example conformance below:
-~~~
+```swift
 extension MyNSManagedObjectSubclass: DeDuplicatingEntity {
 
     func moveRelationships(to destination: MyNSManagedObjectSubclass) {
@@ -28,7 +28,7 @@ extension MyNSManagedObjectSubclass: DeDuplicatingEntity {
         // if you don't have any relationship issues to resolve.
     }
 }
-~~~
+```
 
 Once your types conform to the protocol deduplicating them in your persistent store only requires one method call.
 `static func deduplicateBy(property: String, in context: NSManagedObjectContext)`
@@ -43,7 +43,7 @@ Call this method on the entity Type at an appropriate time and place in your app
 
 
 Example Usage:
-~~~
+```swift
 // Called at an appropriate time and place in your app for deduplication
 func deduplicate(in context: NSManagedObjectContext) {
     context.perform {
@@ -58,4 +58,4 @@ func deduplicate(in context: NSManagedObjectContext) {
        print("Failed to save Context: \(error)")
     }
 }
-~~~
+```

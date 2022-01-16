@@ -7,7 +7,7 @@ import CoreData
 
 
 /// Protocol that adds to ability to quickly deduplicate NSManagedObject instances.
-protocol DeDuplicatingEntity: NSManagedObject {
+public protocol DeDuplicatingEntity: NSManagedObject {
     
     
     /// All conforming types to be deduplicated must have a `uuid: UUID` property declared in your model with a valid UUID. This is used to ensure multiple devices always choose to delete and keep the same copies of entities.
@@ -25,7 +25,7 @@ protocol DeDuplicatingEntity: NSManagedObject {
     func moveRelationships(to destination: Self)
 }
 
-extension DeDuplicatingEntity {
+public extension DeDuplicatingEntity {
     /**
      Deduplicates entities of type using a provided property for duplicate identification.
      

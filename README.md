@@ -2,6 +2,12 @@
 
 DeDuplicatingEntity is a protocol you can add to your Core Data model types to give them the functionality to deduplicate their instances based on a property of the model type you chose at deduplication time. 
 
+There is a [sample project available here.](https://github.com/vichudson1/DeDuplicatingEntity-Sample-Project)
+
+![](https://github.com/vichudson1/DeDuplicatingEntity-Sample-Project/blob/main/Demo.mov)
+
+## Instructions for use.
+
 Get started by conforming your types to the `DeDuplicatingEntity` protocol. Once your model types conform to this protocol they get this functionality provided to them by the protocol extension.
 
 All conforming types to be deduplicated must have a `uuid: UUID?` property declared in your model with a valid UUID saved to each instance. This is used to ensure multiple devices always choose to delete and keep the same copies of entities.
@@ -46,6 +52,9 @@ Example Usage:
 ```swift
 // Called at an appropriate time and place in your app for deduplication
 func deduplicate(in context: NSManagedObjectContext) {
+    // The context should be of 
+    // NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType 
+    // so all work occurs on a background thread.
     context.perform {
        MyNSManagedObjectSubclass.deduplicateBy(property: "name", in: context)
        // Deduplicate other types here....

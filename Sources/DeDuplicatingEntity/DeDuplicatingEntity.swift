@@ -61,10 +61,10 @@ public extension DeDuplicatingEntity {
      
      */
     static func deduplicateBy(property: String, in context: NSManagedObjectContext) {
-        print("Deduplicating: \(Self.entity().name ?? "No Type Found") by: \(property)")
-//        print("Duplicates found: \(Self.duplicatedValuesOf(propertyName: key, in: context))")
+//        print("Deduplicating: \(Self.entity().name ?? "No Type Found") by: \(property)")
+//        print("Duplicates found: \(Self.duplicatedValuesOf(propertyName: property, in: context))")
         for value in Self.duplicatedValuesOf(propertyName: property, in: context) {
-            print("Deduplicating: \(value)")
+//            print("Deduplicating: \(value)")
             // fetch all entities with this value in propertyName
             var entities = Self.entitiesWithValue(value, forKey: property, in: context)
             
@@ -96,13 +96,13 @@ private extension DeDuplicatingEntity {
     ///   - entity: the entity type being checked for duplicate instances
     /// - Returns: an array of the values duplicated in the property of the given entity
     static func duplicatedValuesOf(propertyName: String, in context: NSManagedObjectContext) -> [String] {
-        
+//        print("duplicatedValuesOf(propertyName: \(propertyName), in context: NSManagedObjectContext)")
         guard let entityName = Self.entity().name else {
             print("Unable to find Entity")
             return []
         }
         
-        print("Looking for duplicated values of property: \"\(propertyName)\" in entity: \"\(entityName)\"")
+//        print("Looking for duplicated values of property: \"\(propertyName)\" in entity: \"\(entityName)\"")
         
         // We need an attribute description for the fetch request
         // We are searching the entities of entityType to be deduplicated for all of the
